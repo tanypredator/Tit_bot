@@ -4,7 +4,7 @@ from aiogram.types import Message, ContentType, FSInputFile
 from random import randint
 import asyncio
 
-API_TOKEN: str = '6078588451:AAFOSnBhUxLqOIHK8w59sl6-9pyWaWr13aU'
+API_TOKEN: str = '6091284318:AAFFljp40cBgWzUAI4J8zOiecBYLBYovSZg'
 TIT_PATH = "C:/Users/User/Documents/Картинки/сиське/Красивые девушки - сборник/"
 
 # Создаем объекты бота и диспетчера
@@ -21,7 +21,8 @@ async def start_command(message: Message):
 @dp.message(Command(commands=['help']))
 async def help_command(message: Message):
     await message.answer('Завалю вас сиськами и жопоньками по команде /срач.\n'
-                         'Возможно со временем я научусь замечать срач сам!')
+                         'Возможно со временем я научусь замечать срач сам!\n'
+                         'А ещё я пришлю одну картинку по каманде /покажи ^_^')
 
 # Этот хэндлер будет срабатывать на команду "/срач"
 @dp.message(Command(commands=['срач']))
@@ -36,6 +37,12 @@ async def shit_command(message: Message):
         photo = FSInputFile(f'{TIT_PATH}{r}.jpg')
         await bot.send_photo(chat_id=message.chat.id, photo=photo)
 
+# Этот хэндлер будет срабатывать на команду "/покажи"
+@dp.message(Command(commands=['покажи']))
+async def shit_command(message: Message):
+    r = randint(1, 1164)
+    photo = FSInputFile(f'{TIT_PATH}{r}.jpg')
+    await bot.send_photo(chat_id=message.chat.id, photo=photo)
 
 if __name__ == '__main__':
     dp.run_polling(bot)
