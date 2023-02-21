@@ -4,8 +4,11 @@ from aiogram.types import Message, ContentType, FSInputFile
 from random import randint
 import asyncio
 
-API_TOKEN: str = '6091284318:AAFFljp40cBgWzUAI4J8zOiecBYLBYovSZg'
+API_TOKEN: str
 TIT_PATH = "C:/Users/User/Documents/Картинки/сиське/Красивые девушки - сборник/"
+
+with open("token.txt", "r") as token:
+    API_TOKEN = token.read()
 
 # Создаем объекты бота и диспетчера
 bot: Bot = Bot(token=API_TOKEN)
@@ -22,7 +25,7 @@ async def start_command(message: Message):
 async def help_command(message: Message):
     await message.answer('Завалю вас сиськами и жопоньками по команде /срач.\n'
                          'Возможно со временем я научусь замечать срач сам!\n'
-                         'А ещё я пришлю одну картинку по каманде /покажи ^_^')
+                         'А ещё я пришлю одну картинку по команде /покажи ^_^')
 
 # Этот хэндлер будет срабатывать на команду "/срач"
 @dp.message(Command(commands=['срач']))
