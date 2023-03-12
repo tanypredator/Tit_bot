@@ -1,11 +1,14 @@
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
 from aiogram.types import Message, ContentType, FSInputFile
-from random import randint
+from random import choice
+from os import listdir
+from pdb import set_trace
 import asyncio
 
 API_TOKEN: str
-TIT_PATH = "C:/Users/User/Documents/Картинки/сиське/Красивые девушки - сборник/"
+TIT_PATH = "/home/tanypredator/siski/"
+TITIES = listdir(TIT_PATH)
 
 with open("token.txt", "r") as token:
     API_TOKEN = token.read()
@@ -31,20 +34,20 @@ async def help_command(message: Message):
 @dp.message(Command(commands=['срач']))
 async def shit_command(message: Message):
     for i in range(3):
-        r = randint(1, 1164)
-        photo = FSInputFile(f'{TIT_PATH}{r}.jpg')
+        r = choice(TITIES)
+        photo = FSInputFile(f'{TIT_PATH}{r}')
         await bot.send_photo(chat_id=message.chat.id, photo=photo)
     for i in range(5):
         await asyncio.sleep(10)
-        r = randint(1, 1164)
-        photo = FSInputFile(f'{TIT_PATH}{r}.jpg')
+        r = choice(TITIES)
+        photo = FSInputFile(f'{TIT_PATH}{r}')
         await bot.send_photo(chat_id=message.chat.id, photo=photo)
 
 # Этот хэндлер будет срабатывать на команду "/покажи"
 @dp.message(Command(commands=['покажи']))
 async def shit_command(message: Message):
-    r = randint(1, 1164)
-    photo = FSInputFile(f'{TIT_PATH}{r}.jpg')
+    r = choice(TITIES)
+    photo = FSInputFile(f'{TIT_PATH}{r}')
     await bot.send_photo(chat_id=message.chat.id, photo=photo)
 
 if __name__ == '__main__':
