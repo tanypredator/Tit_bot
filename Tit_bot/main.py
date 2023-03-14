@@ -5,10 +5,14 @@ from random import choice
 from os import listdir
 from pdb import set_trace
 import asyncio
+import requests
+from lxml import etree
+from urllib.parse import urljoin
 
 API_TOKEN: str
 TIT_PATH = "/home/tanypredator/siski/"
 TITIES = listdir(TIT_PATH)
+API_TITS_URL: str = 'https://www.thesetitsdonotexist.com/'
 
 with open("token.txt", "r") as token:
     API_TOKEN = token.read()
@@ -28,7 +32,8 @@ async def start_command(message: Message):
 async def help_command(message: Message):
     await message.answer('Завалю вас сиськами и жопоньками по команде /срач.\n'
                          'Возможно со временем я научусь замечать срач сам!\n'
-                         'А ещё я пришлю одну картинку по команде /покажи ^_^')
+                         'А ещё я пришлю одну картинку по команде /покажи ^_^\n'
+                         'А по команде /пиздец я пришлю столько, что всем тошно станет.')
 
 # Этот хэндлер будет срабатывать на команду "/срач"
 @dp.message(Command(commands=['срач']))
@@ -49,6 +54,27 @@ async def shit_command(message: Message):
     r = choice(TITIES)
     photo = FSInputFile(f'{TIT_PATH}{r}')
     await bot.send_photo(chat_id=message.chat.id, photo=photo)
+
+# Этот хэндлер будет срабатывать на команду "/пиздец"
+@dp.message(Command(commands=['пиздец']))
+async def holyshit_command(message: Message):
+    for i in range(3):
+        tit_response = requests.get(API_TITS_URL)
+        parser = etree.HTMLParser()
+		root = etree.fromstring(tit_response.text, parser)
+
+		image = root.xpath('//img/@src')
+		image = urljoin(tit_response.url, image[0])
+        await bot.send_photo(chat_id=message.chat.id, photo=image)
+    for i in range(8):
+        await asyncio.sleep(10)
+        tit_response = requests.get(API_TITS_URL)
+        parser = etree.HTMLParser()
+		root = etree.fromstring(tit_response.text, parser)
+
+		image = root.xpath('//img/@src')
+		image = urljoin(tit_response.url, image[0])
+        await bot.send_photo(chat_id=message.chat.id, photo=image)
 
 if __name__ == '__main__':
     dp.run_polling(bot)
