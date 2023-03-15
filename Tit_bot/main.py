@@ -58,7 +58,7 @@ async def shit_command(message: Message):
 @dp.message(Command(commands=['пиздец']))
 async def holyshit_command(message: Message):
     for i in range(3):
-        await asyncio.sleep(5)
+        await asyncio.sleep(3)
 	async with httpx.AsyncClient() as client:
 	    tit_response = await client.get(API_TITS_URL)
 	    parser = etree.HTMLParser()
@@ -67,7 +67,7 @@ async def holyshit_command(message: Message):
 	    image = urljoin(str(tit_response.url), image[0])
             await bot.send_photo(chat_id=message.chat.id, photo=image)
     for i in range(8):
-        await asyncio.sleep(10)
+        await asyncio.sleep(8)
 	async with httpx.AsyncClient() as client:
 	    tit_response = await client.get(API_TITS_URL)
 	    parser = etree.HTMLParser()
