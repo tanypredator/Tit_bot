@@ -3,9 +3,8 @@ from aiogram.filters import Command
 from aiogram.types import Message, ContentType, FSInputFile
 from random import choice
 from os import listdir
-from pdb import set_trace
 import asyncio
-import requests
+import httpx
 from lxml import etree
 from urllib.parse import urljoin
 
@@ -59,28 +58,23 @@ async def shit_command(message: Message):
 @dp.message(Command(commands=['пиздец']))
 async def holyshit_command(message: Message):
     for i in range(3):
-        tit_response = requests.get(API_TITS_URL)
-        parser = etree.HTMLParser()
-		root = etree.fromstring(tit_response.text, parser)
-
-		image = root.xpath('//img/@src')
-		image = urljoin(tit_response.url, image[0])
-        await bot.send_photo(chat_id=message.chat.id, photo=image)
+        await asyncio.sleep(5)
+	async with httpx.AsyncClient() as client:
+	    tit_response = await client.get(API_TITS_URL)
+	    parser = etree.HTMLParser()
+	    root = etree.fromstring(tit_response.text, parser)
+	    image = root.xpath('//img/@src')
+	    image = urljoin(str(tit_response.url), image[0])
+            await bot.send_photo(chat_id=message.chat.id, photo=image)
     for i in range(8):
         await asyncio.sleep(10)
-        tit_response = requests.get(API_TITS_URL)
-        parser = etree.HTMLParser()
-		root = etree.fromstring(tit_response.text, parser)
-
-		image = root.xpath('//img/@src')
-		image = urljoin(tit_response.url, image[0])
-        await bot.send_photo(chat_id=message.chat.id, photo=image)
+	async with httpx.AsyncClient() as client:
+	    tit_response = await client.get(API_TITS_URL)
+	    parser = etree.HTMLParser()
+	    root = etree.fromstring(tit_response.text, parser)
+	    image = root.xpath('//img/@src')
+	    image = urljoin(str(tit_response.url), image[0])
+            await bot.send_photo(chat_id=message.chat.id, photo=image)
 
 if __name__ == '__main__':
     dp.run_polling(bot)
-
-'''
-@dp.message()
-async def send_echo(message: Message):
-    await message.reply(text=message.text)
-'''
