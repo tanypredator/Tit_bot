@@ -54,8 +54,8 @@ async def shit_command(message: Message):
     photo = FSInputFile(f'{TIT_PATH}{r}')
     await bot.send_photo(chat_id=message.chat.id, photo=photo)
 
-# Этот хэндлер будет срабатывать на команду "/пиздец"
-@dp.message(Command(commands=['пиздец']))
+# Этот хэндлер будет срабатывать на команду "/трындец"
+@dp.message(Command(commands=['трындец']))
 async def holyshit_command(message: Message):
     for i in range(3):
         await asyncio.sleep(3)
