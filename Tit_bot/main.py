@@ -4,9 +4,7 @@ from aiogram.types import Message, ContentType, FSInputFile
 from random import choice
 from os import listdir
 import asyncio
-import httpx
-from lxml import etree
-from urllib.parse import urljoin
+from uuid import uuid4
 
 API_TOKEN: str
 TIT_PATH = "/home/tanypredator/siski/"
@@ -57,24 +55,13 @@ async def shit_command(message: Message):
 # Этот хэндлер будет срабатывать на команду "/трындец"
 @dp.message(Command(commands=['трындец']))
 async def holyshit_command(message: Message):
+    await bot.send_photo(chat_id=message.chat.id, photo=f"{API_TITS_URL}img.png?a={uuid4()}")
     for i in range(3):
-        await asyncio.sleep(3)
-	async with httpx.AsyncClient() as client:
-	    tit_response = await client.get(API_TITS_URL)
-	    parser = etree.HTMLParser()
-	    root = etree.fromstring(tit_response.text, parser)
-	    image = root.xpath('//img/@src')
-	    image = urljoin(str(tit_response.url), image[0])
-            await bot.send_photo(chat_id=message.chat.id, photo=image)
+        await asyncio.sleep(4)
+        await bot.send_photo(chat_id=message.chat.id, photo=f"{API_TITS_URL}img.png?a={uuid4()}")
     for i in range(8):
         await asyncio.sleep(8)
-	async with httpx.AsyncClient() as client:
-	    tit_response = await client.get(API_TITS_URL)
-	    parser = etree.HTMLParser()
-	    root = etree.fromstring(tit_response.text, parser)
-	    image = root.xpath('//img/@src')
-	    image = urljoin(str(tit_response.url), image[0])
-            await bot.send_photo(chat_id=message.chat.id, photo=image)
+        await bot.send_photo(chat_id=message.chat.id, photo=f"{API_TITS_URL}img.png?a={uuid4()}")
 
 if __name__ == '__main__':
     dp.run_polling(bot)
