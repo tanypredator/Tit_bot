@@ -21,14 +21,14 @@ dp: Dispatcher = Dispatcher()
 # Этот хэндлер будет срабатывать на команду "/start"
 @dp.message(Command(commands=["start"]))
 async def start_command(message: Message):
-    await message.answer('Привет!\nМеня зовут Сисько-бот!\nВызывайте меня командой /срач если нужно')
+    await message.answer('Привет!\nМеня зовут Сисько-бот!\nВызывайте меня командой /срач если нужно\n18+')
 
 
 # Этот хэндлер будет срабатывать на команду "/help"
 @dp.message(Command(commands=['help']))
 async def help_command(message: Message):
     await message.answer('Завалю вас сиськами и жопоньками по команде /срач.\n'
-                         'Возможно со временем я научусь замечать срач сам!\n'
+                         '18+\n'
                          'А ещё я пришлю одну картинку по команде /покажи ^_^\n'
                          'А по команде /трындец я пришлю столько, что всем тошно станет.')
 
